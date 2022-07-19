@@ -11,6 +11,40 @@ Online Demo: https://demo.cloudwebrtc.com:8086/
 - Support [REST API For Access To TURN Services](https://tools.ietf.org/html/draft-uberti-behave-turn-rest-00)
 - Use [flutter-webrtc-demo](https://github.com/cloudwebrtc/flutter-webrtc-demo) for all platforms.
 
+## SETUP
+
+(1) Create systemd file
+
+sudo nano /lib/systemd/system/goweb.service
+
+(2) Add to systemd goweb.service file
+
+* Important to set working directory or it won't find the configs folder 
+
+```
+[Unit]
+Description=goweb
+
+[Service]
+Type=simple
+WorkingDirectory=/home/flutter-webrtc-server
+ExecStart=/home/flutter-webrtc-server/main
+
+[Install]
+WantedBy=multi-user.target
+```
+
+sudo service goweb start
+sudo service goweb restart
+sudo service goweb status
+
+
+(3) Expose port 8086
+sudo ufw allow 8086
+sudo ufw allow 19302
+
+
+
 ## Usage
 
 ### Run from source
@@ -28,6 +62,7 @@ cd flutter-webrtc-server
 brew update
 brew install mkcert
 mkcert -key-file configs/certs/key.pem -cert-file configs/certs/cert.pem  localhost 127.0.0.1 ::1 0.0.0.0
+mkcert -install
 ```
 
 - Run
