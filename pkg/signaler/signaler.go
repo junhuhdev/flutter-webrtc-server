@@ -63,6 +63,8 @@ type PeerInfo struct {
 	ID        string `json:"id"`
 	Name      string `json:"name"`
 	UserAgent string `json:"user_agent"`
+	// json user type
+	User map[string]interface{} `json:"user"`
 	UserName  string `json:"user_name"`
 	UserPhoto string `json:"user_photo"`
 }
